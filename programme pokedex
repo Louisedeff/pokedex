@@ -11,7 +11,7 @@ def combat2():
     mon_pokemon = ""
     ## génération du perso 1
     
-    perso1 = int(input("Joueur 1, donne moi le numéro du pokémon de ton choix (entre 1 et 251).")) ##choix par l'humain
+    perso1 = int(input("Joueur 1, donne moi le numéro du pokémon de ton choix (entre 1 et 251).")) 
 
     for i in range(len(pokedex_1)):
         if i == perso1:
@@ -45,7 +45,7 @@ def combat2():
         attk2 = attk2.upper()
         
         
-        if attk == A and attk2 == D: ## posibilité 1
+        if attk == A and attk2 == D: 
             print("Attention",mon_pokemon,"attaque, heureusement",mon_pokemon2,"tu t'es défendu, tu perds moins de points de vie grace à ça")
             HP1 = int(HP1 - atk1/10)
             print(mon_pokemon, "tu perds", int(atk1/10), "points de vie, il t'en reste", HP1)
@@ -62,7 +62,7 @@ def combat2():
             else:
                 print("\n")
                 
-        elif attk == D and attk2 == D:  ## posibilité 2
+        elif attk == D and attk2 == D:
             HP1 = HP1 - 0 
             HP2 = HP2 - 0
             print(mon_pokemon,mon_pokemon2,"vous vous défendez tous les deux, c'est nul, c'est pas comme ça que le combat va avancer")
@@ -78,7 +78,7 @@ def combat2():
             else:
                 print("\n")
                  
-        elif attk == D and attk2 == A:   ## posibilité 3
+        elif attk == D and attk2 == A: 
             print("Attention",mon_pokemon2,"attaque, heureusement",mon_pokemon,"tu t'es défendu, tu perds moins de points de vie grace à ça")
             HP1 = int(HP1 - (atk2-(deff1/2)))
             print(mon_pokemon, "tu perds", int(atk2-(deff1/2)) , "points de vie, il t'en reste", HP1)
@@ -95,7 +95,7 @@ def combat2():
             else:
                 print("\n")
                 
-        elif attk == A and attk2 == A:   ## posibilité 4
+        elif attk == A and attk2 == A:   
             print(mon_pokemon,mon_pokemon2,"vous vous attaquez tous les deux, bah alors, la violence ne résoud rien on ne vous l'a jamais dit, pour la peine, tout le monde perd de la vie...")
             HP1 = int(HP1 - atk1/8)
             print(mon_pokemon, "tu perds", int(atk1/5), "points de vie, il t'en reste", HP1)
