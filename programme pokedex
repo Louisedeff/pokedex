@@ -1,0 +1,136 @@
+from random import*
+import csv
+
+fichier = open('pokedex_en.csv')
+pokedex_1 = list(csv.DictReader(fichier))
+fichier.close()
+
+def combat2():
+    HP2 = 0.0
+    HP1 = 0.0
+    mon_pokemon = ""
+    ## génération du perso 1
+    
+    perso1 = int(input("Joueur 1, donne moi le numéro du pokémon de ton choix (entre 1 et 251)."))
+
+    for i in range(len(pokedex_1)):
+        if i == perso1:
+            mon_pokemon = pokedex_1[i]["Name"]
+            print("Joueur 1, ton pokémon est donc ",mon_pokemon,"\n")
+            atk1 = int(pokedex_1[i]['Attack'])
+            deff1 = int(pokedex_1[i]['Defense'])
+            HP1 = int(pokedex_1[i]['HP'])
+        
+    ## généartion du perso 2
+    
+    perso2 = int(input("Joueur 2, donne moi le numéro du pokémon de ton choix (entre 1 et 251)."))
+    
+
+    for i in range(len(pokedex_1)):
+        if i == perso2:
+            mon_pokemon2 = pokedex_1[i]["Name"]
+            print("Et joueur 2, ton pokémon est donc ",mon_pokemon2,"\n")
+            atk2 = int(pokedex_1[i]['Attack'])
+            deff2 = int(pokedex_1[i]['Defense'])
+            HP2 = int(pokedex_1[i]['HP'])
+            
+    ## déroulement du combat
+    A = "A"
+    D = "D"
+    while HP2 > 0 and HP1 > 0:
+        attk = input("Joueur 1, que veux tu faire, tu peux attaquer -> A ou te défendre -> D ")
+        attk = attk.upper()
+        attk2 = input("Joueur 2, que veux tu faire, tu peux attaquer -> A ou te défendre -> D ")
+        print("\n")
+        attk2 = attk2.upper()
+        
+        
+        if attk == A and attk2 == D:
+            print("Attention",mon_pokemon,"attaque, heureusement",mon_pokemon2,"tu t'es défendu, tu perds moins de points de vie grace à ça")
+            HP1 = int(HP1 - atk1/10)
+            print(mon_pokemon, "tu perds", int(atk1/10), "points de vie, il t'en reste", HP1)
+            HP2 = int(HP2 - (atk1-deff2))
+            print(mon_pokemon2, "tu perds", int(atk1-deff2) , "points de vie, il t'en reste", HP2)
+            if HP1 <= 0:
+                print("Il semble que ", mon_pokemon," tu n'as plus de points de vie...")
+                HP1 = 0
+            elif HP2 <= 0:
+                print("Il semble que ", mon_pokemon2," tu n'as plus de points de vie...")
+                HP2 = 0
+            elif HP2 <= 0 and HP1 <= 0:
+                print("Il me semble qu'il y a une égalité.")
+            else:
+                print("\n")
+                
+        elif attk == D and attk2 == D:
+            HP1 = HP1 - 0 
+            HP2 = HP2 - 0
+            print(mon_pokemon,mon_pokemon2,"vous vous défendez tous les deux, c'est nul, c'est pas comme ça que le combat va avancer")
+            print(mon_pokemon2,mon_pokemon, "vous ne perdez pas de points de vie")
+            if HP1 <= 0:
+                print("Il semble que ", mon_pokemon," tu n'as plus de points de vie...")
+                HP1 = 0
+            elif HP2 <= 0:
+                print("Il semble que ", mon_pokemon2," tu n'as plus de points de vie...")
+                HP2 = 0
+            elif HP2 <= 0 and HP1 <= 0:
+                print("Il me semble qu'il y a une égalité.")
+            else:
+                print("\n")
+                
+        elif attk == D and attk2 == A:
+            print("Attention",mon_pokemon2,"attaque, heureusement",mon_pokemon,"tu t'es défendu, tu perds moins de points de vie grace à ça")
+            HP1 = int(HP1 - (atk2-deff1))
+            print(mon_pokemon, "tu perds", int(atk2-deff1) , "points de vie, il t'en reste", HP1)
+            HP2 = int(HP2 - atk2/10)
+            print(mon_pokemon2, "tu perds", int(atk2/10), "points de vie, il t'en reste", HP2)
+            if HP1 <= 0:
+                print("Il semble que ", mon_pokemon," tu n'as plus de points de vie...")
+                HP1 = 0
+            elif HP2 <= 0:
+                print("Il semble que ", mon_pokemon2," tu n'as plus de points de vie...")
+                HP2 = 0
+            elif HP2 <= 0 and HP1 <= 0:
+                print("Il me semble qu'il y a une égalité.")
+            else:
+                print("\n")
+                
+        elif attk == A and attk2 == A:
+            print(mon_pokemon,mon_pokemon2,"vous vous attaquez tous les deux, bah alors, la violence ne résoud rien on ne vous l'a jamais dit, pour la peine, tout le monde perd de la vie...")
+            HP1 = int(HP1 - atk1/8)
+            print(mon_pokemon, "tu perds", int(atk1/8), "points de vie, il t'en reste", HP1)
+            HP2 = int(HP2 - atk2/8)
+            print(mon_pokemon2, "tu perds", int(atk2/8), "points de vie, il t'en reste", HP2)
+            if HP1 <= 0:
+                print("Il semble que ", mon_pokemon," tu n'as plus de points de vie...")
+                HP1 = 0
+            elif HP2 <= 0:
+                print("Il semble que ", mon_pokemon2," tu n'as plus de points de vie...")
+                HP2 = 0
+            elif HP2 <= 0 and HP1 <= 0:
+                print("Il me semble qu'il y a une égalité.")
+            else:
+                print("\n")
+            
+    if HP1 == 0:
+        perdant = mon_pokemon
+        print(perdant,"tu as perdu")
+        print("\n")
+    elif HP2 == 0:
+        perdant = mon_pokemon2
+        print(perdant,"tu as perdu")
+        print("\n")
+    else:
+        print("Il y a une égalité,", mon_pokemon, "et", mon_pokemon2, "vous avez tous les deux perdu...")
+
+
+    question = input("Veut tu rejouer? répond par oui ou non: ")
+    print("\n")
+    question = question.lower()
+
+    if question == "oui":
+        combat2()
+    elif question == "non":
+        print("Ok, à bientot")
+    else:
+        print("Ce n'était pas une option... Bye bye....")
